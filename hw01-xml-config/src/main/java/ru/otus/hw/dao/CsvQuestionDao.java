@@ -2,9 +2,10 @@ package ru.otus.hw.dao;
 
 import lombok.RequiredArgsConstructor;
 import ru.otus.hw.config.TestFileNameProvider;
+import ru.otus.hw.dao.dto.QuestionDto;
 import ru.otus.hw.domain.Question;
+import ru.otus.hw.exceptions.QuestionReadException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -13,11 +14,15 @@ public class CsvQuestionDao implements QuestionDao {
 
     @Override
     public List<Question> findAll() {
-        // Использовать CsvToBean
-        // https://opencsv.sourceforge.net/#collection_based_bean_fields_one_to_many_mappings
-        // Использовать QuestionReadException
-        // Про ресурсы: https://mkyong.com/java/java-read-a-file-from-resources-folder/
+        List<QuestionDto> questionsFromCsv;
+        try {
+            var csvFileName = fileNameProvider.getTestFileName();
+            var csvReader = CsvToBeanUtil.buildCsvToBean(csvFileName);
+            questionsFromCsv = csvReader.parse();
+        } catch (Exception e) {
+            throw new QuestionReadException("CSV paring error", e);
+        }
 
-        return new ArrayList<>();
+        return questionsFromCsv.stream().map(QuestionDto::toDomainObject).toList();
     }
 }
