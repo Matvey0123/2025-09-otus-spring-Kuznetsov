@@ -29,7 +29,7 @@ class CommentServiceImplTest {
         var actualComment = service.findById("1").get();
         assertThat(actualComment.getId()).isEqualTo("1");
         assertThat(actualComment.getText()).isEqualTo("comment_1");
-        assertThat(actualComment.getBookId()).isEqualTo("1");
+        assertThat(actualComment.getBook().getId()).isEqualTo("1");
     }
 
     @Test
@@ -37,7 +37,7 @@ class CommentServiceImplTest {
     void shouldFindByBookId() {
         var comments = service.findByBookId("1");
         assertThat(comments).isNotEmpty()
-                .allMatch(c -> c.getText() != null && "1".equals(c.getBookId()));
+                .allMatch(c -> c.getText() != null && "1".equals(c.getBook().getId()));
     }
 
     @Test
@@ -45,11 +45,11 @@ class CommentServiceImplTest {
     void shouldInsertComment() {
         var newComment = service.insert("newText", "2");
         assertThat(newComment.getText()).isEqualTo("newText");
-        assertThat(newComment.getBookId()).isEqualTo("2");
+        assertThat(newComment.getBook().getId()).isEqualTo("2");
 
         var allComments = operations.findAll(Comment.class);
         assertThat(allComments).hasSize(10)
-                .anyMatch(c -> "newText".equals(c.getText()) && "2".equals(c.getBookId()));
+                .anyMatch(c -> "newText".equals(c.getText()) && "2".equals(c.getBook().getId()));
     }
 
     @Test
@@ -58,7 +58,7 @@ class CommentServiceImplTest {
         var updatedComment = service.update("3", "newText2");
         assertThat(updatedComment.getId()).isEqualTo("3");
         assertThat(updatedComment.getText()).isEqualTo("newText2");
-        assertThat(updatedComment.getBookId()).isEqualTo("1");
+        assertThat(updatedComment.getBook().getId()).isEqualTo("1");
     }
 
     @Test

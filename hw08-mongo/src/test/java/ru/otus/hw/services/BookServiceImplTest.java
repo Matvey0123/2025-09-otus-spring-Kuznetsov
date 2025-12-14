@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.core.MongoOperations;
+import ru.otus.hw.listeners.MongoBookDeleteListener;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
@@ -19,7 +20,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
-@Import(BookServiceImpl.class)
+@Import({BookServiceImpl.class, MongoBookDeleteListener.class})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BookServiceImplTest {
 
@@ -75,9 +76,9 @@ class BookServiceImplTest {
         var comment1 = operations.findById("1", Comment.class);
         var comment2 = operations.findById("2", Comment.class);
         var comment3 = operations.findById("3", Comment.class);
-        assertThat(comment1.getBookId()).isEqualTo("1");
-        assertThat(comment2.getBookId()).isEqualTo("1");
-        assertThat(comment3.getBookId()).isEqualTo("1");
+        assertThat(comment1.getBook().getId()).isEqualTo("1");
+        assertThat(comment2.getBook().getId()).isEqualTo("1");
+        assertThat(comment3.getBook().getId()).isEqualTo("1");
 
         service.deleteById("1");
 

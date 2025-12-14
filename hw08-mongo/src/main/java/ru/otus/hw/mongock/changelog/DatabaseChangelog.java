@@ -72,16 +72,16 @@ public class DatabaseChangelog {
 
     @ChangeSet(order = "004", id = "initComments", author = "matvey")
     public void initComments(CommentRepository commentRepository) {
-        commentRepository.save(new Comment("1", "comment_1", book1.getId()));
-        commentRepository.save(new Comment("2", "comment_2", book1.getId()));
-        commentRepository.save(new Comment("3", "comment_3", book1.getId()));
+        commentRepository.save(new Comment("1", "comment_1", book1));
+        commentRepository.save(new Comment("2", "comment_2", book1));
+        commentRepository.save(new Comment("3", "comment_3", book1));
 
-        commentRepository.save(new Comment("4", "comment_4", book2.getId()));
-        commentRepository.save(new Comment("5", "comment_5", book2.getId()));
-        commentRepository.save(new Comment("6", "comment_6", book2.getId()));
+        commentRepository.save(new Comment("4", "comment_4", book2));
+        commentRepository.save(new Comment("5", "comment_5", book2));
+        commentRepository.save(new Comment("6", "comment_6", book2));
 
-        commentRepository.save(new Comment("7", "comment_7", book3.getId()));
-        commentRepository.save(new Comment("8", "comment_8", book3.getId()));
-        commentRepository.save(new Comment("9", "comment_9", book3.getId()));
+        commentRepository.save(new Comment("7", "comment_7", book3));
+        commentRepository.save(new Comment("8", "comment_8", book3));
+        commentRepository.save(new Comment("9", "comment_9", book3));
     }
 }

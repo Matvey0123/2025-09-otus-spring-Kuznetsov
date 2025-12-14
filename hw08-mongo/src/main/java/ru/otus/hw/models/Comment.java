@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -19,10 +20,11 @@ public class Comment {
 
     private String text;
 
-    private String bookId;
+    @DBRef(lazy = true)
+    private Book book;
 
-    public Comment(String text, String bookId) {
+    public Comment(String text, Book book) {
         this.text = text;
-        this.bookId = bookId;
+        this.book = book;
     }
 }

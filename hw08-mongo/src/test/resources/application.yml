@@ -3,6 +3,14 @@ spring:
     mongodb:
       port: 0
       database: test
+  shell:
+    interactive:
+      enabled: false
+    noninteractive:
+      enabled: false
+    command:
+      version:
+        enabled: false
 
 de:
   flapdoodle:
