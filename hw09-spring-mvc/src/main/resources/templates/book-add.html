@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add book</title>
+    <style type="text/css">
+        body {
+            padding: 0px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+
+<form id="book-add-form" action="book-add.html" th:method="post" th:action="@{/books}"
+      th:object="${book}">
+    <h3>Добавление книги:</h3>
+
+    <div class="row">
+        <label for="book-title-input">Название:</label>
+        <input id="book-title-input" name="title" type="text" value="New book" th:value="*{title}"/>
+    </div>
+
+    <div class="row">
+        <label for="author-name-select">Автор:</label>
+        <select id="author-name-select" th:field="*{author}">
+            <option th:each="author : ${allAuthors}"
+                    th:value="${author.id}"
+                    th:text="${author.fullName}">New author
+            </option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label for="genres-select">Жанры:</label>
+        <select id="genres-select" th:field="*{genres}" multiple="multiple">
+            <option th:each="genre : ${allGenres}"
+                    th:value="${{genre.id}}"
+                    th:text="${genre.name}">New genre
+            </option>
+        </select>
+    </div>
+
+    <div class="row">
+        <button type="submit">Сохранить</button>
+        <a href="list.html" th:href="@{/}">
+            <button type="button">Отменить</button>
+        </a>
+    </div>
+</form>
+
+</body>
+</html>
