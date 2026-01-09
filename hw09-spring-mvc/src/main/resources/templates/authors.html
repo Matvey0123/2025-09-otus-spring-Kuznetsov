@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all authors</title>
+    <style type="text/css">
+        body {
+            padding: 0px;
+        }
+
+        .authors {
+            border: 1px solid steelblue;
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .authors tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .authors td:last-child, td:first-child {
+            width: 50px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<h3>Авторы:</h3>
+
+<table class="authors">
+    <thead>
+    <tr>
+        <th>Имя</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="author : ${authors}" th:object="${author}">
+        <td th:text="*{fullName}">Author_1</td>
+    </tr>
+    </tbody>
+</table>
+<a href="books.html" th:href="@{/}">
+    <button type="button">Назад</button>
+</a>
+</body>
+</html>
