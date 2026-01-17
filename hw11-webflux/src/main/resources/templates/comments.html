@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" href="data:;base64,=">
+    <title>List of comments</title>
+    <style type="text/css">
+        body {
+            padding: 0px;
+        }
+
+        .comments {
+            border: 1px solid steelblue;
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .comments tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .comments td:last-child, td:first-child {
+            width: 50px;
+        }
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+<h3>Комментарии:</h3>
+
+<table class="comments">
+    <thead>
+    <tr>
+        <th>Комментарий</th>
+    </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+<a href="books.html" th:href="@{/}">
+    <button type="button">Назад</button>
+</a>
+
+<script th:src="@{js/comments.js}"></script>
+
+</body>
+</html>
