@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      port: 0
+      database: library
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 8.2.2
+
+mongock:
+  enabled: true
