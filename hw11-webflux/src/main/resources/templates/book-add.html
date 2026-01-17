@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" href="data:;base64,=">
+    <title>Add book</title>
+    <style type="text/css">
+        body {
+            padding: 0px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+<h3>Добавление книги:</h3>
+
+<div class="row">
+    <label for="book-title-input">Название:</label>
+    <input id="book-title-input" name="title" type="text"/>
+</div>
+
+<div class="row">
+    <label for="author-name-select">Автор:</label>
+    <select id="author-name-select">
+    </select>
+</div>
+
+<div class="row">
+    <label for="genres-select">Жанры:</label>
+    <select id="genres-select" multiple="multiple">
+    </select>
+</div>
+
+<div class="row">
+    <button onclick="saveBook()">Сохранить</button>
+    <a href="list.html" th:href="@{/}">
+        <button type="button">Отменить</button>
+    </a>
+</div>
+
+<script th:src="@{../js/book-add.js}"></script>
+
+</body>
+</html>
