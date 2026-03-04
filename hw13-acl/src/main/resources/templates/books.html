@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" href="data:;base64,=">
+    <title>List of all books</title>
+    <style type="text/css">
+        body {
+            padding: 0px;
+        }
+
+        .books {
+            border: 1px solid steelblue;
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .books tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .books td:last-child, td:first-child {
+            width: 50px;
+        }
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<h3>Список книг</h3>
+
+<table class="books">
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Жанры</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}" th:object="${book}">
+        <td th:text="*{title}">Title</td>
+        <td th:text="*{author.fullName}">Author_fullName</td>
+        <td> <span th:each="genre, iterStat : *{genres}">
+        <span th:text="${genre.name}">Genre_name</span>
+        <span th:if="${!iterStat.last}">, </span>
+        </span>
+        </td>
+
+        <td>
+            <div class="row">
+                <a href="comments.html" th:href="@{/comments(bookId=*{id})}" th:method="get"
+                   th:action="@{/comments(bookId=*{id})}">
+                    <button type="button">Посмотреть комментарии</button>
+                </a>
+                <a href="book-edit.html" th:href="@{/books/edit(id=*{id})}">
+                    <button type="button">Изменить</button>
+                </a>
+                <form th:action="@{/books/delete(id=*{id})}" th:method="post">
+                    <button type="submit">Удалить</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="row">
+    <a href="book-add.html" th:href="@{/books/add}">
+        <button type="button">Добавить книгу</button>
+    </a>
+</div>
+
+<div class="row">
+    <a href="authors.html" th:href="@{/authors}" th:method="get"
+       th:action="@{/authors}">
+        <button type="button">Посмотреть список авторов</button>
+    </a>
+</div>
+
+<div class="row">
+    <a href="genres.html" th:href="@{/genres}" th:method="get"
+       th:action="@{/genres}">
+        <button type="button">Посмотреть список жанров</button>
+    </a>
+</div>
+
+</body>
+</html>
